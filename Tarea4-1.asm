@@ -13,7 +13,6 @@ main:
 	li $t1, 0 #temporal register
 	li $t2, 0 #temporal register
 	li $t5, 0 # Acc
-	j for #Llamamos la funcion
 
 for:
 	subi $a0, $a0,1
