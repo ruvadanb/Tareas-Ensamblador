@@ -12,6 +12,13 @@ main:
 	li $t0, 0 # i=0
 	li $t1, 0 #temporal register
 	li $t2, 0 #temporal register
+	li $t5, 0 # Acc
+	jal for #Llamamos la funcion
+
+for:
+	slti $t6, $a0, 1
+	beq $t6, $zero, mulAndAccumulate
+	j exit
 	
 multAndAccumulate:
 	sll $t1, $t0, 2 #shift left i
@@ -20,6 +27,14 @@ multAndAccumulate:
 	add $t2, $t2, $s2 #Adding offset
 	lw $t3, 0($t1) #Leemos el 1 y lo guardamos en t3
 	lw $t4, 0($t2) #Leemos el 6 y lo guardamos en t4
+	mult $t3, $t4 #t3=mulres
+	jal Accumulate
 	
+Accumulate:
+	add $t5, $t5, $t4 #sumamos todo en el acumulador
+	 jr $ra
+	
+Exit:	
+
 	
 	
