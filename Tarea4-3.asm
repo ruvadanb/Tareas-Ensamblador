@@ -2,7 +2,7 @@
 
 
 .text
-	li $s0, 1 #counter
+	li $s0, 1 #counteer
 	li $s1, 0 #variable
 	li $s2, 20 #constante
 	li $t1, 4 #constante
