@@ -11,12 +11,12 @@
 	
 	for:
 	slt $t0, $s1, $s0 # si i<n t0=1
-	beq $t0, $t2, multiplicacion
-	j exit
+	beq $t0, $t2, multiplicacion #Llamamos funcion
+	j exit #salimos
 	
 	multiplicacion:
-	addi $s1, $s1, 1
-	mul $s2, $t3, $s2
-	j for
+	addi $s1, $s1, 1 #aumentamos i++
+	mul $s2, $t3, $s2 #multiplicacmos 2*resultado
+	j for #regresamos al for
 	
 	exit:
