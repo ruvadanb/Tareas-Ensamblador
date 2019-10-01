@@ -4,6 +4,7 @@
 	#Daniel Ruvalcaba Barboza 715472
 	
 	# $a0 es nuestra N
+	# $s0 es nuestro resultado final
 	
 	main:
 	li $a0, 5 #s0 Sera N
