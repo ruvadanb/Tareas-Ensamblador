@@ -1,9 +1,12 @@
 .data
 
 .text
+	#Daniel Ruvalcaba Barboza 715472
+	
+	# $a0 es nuestra N
 	
 	main:
-	li $a0, 17 #s0 Sera N
+	li $a0, 5 #s0 Sera N
 	add $t2, $zero, $a0 # copiamos n en t2 para validar el caso base
 	addi $a0, $a0, -1 # por el algoritmo restamos 1 a N
 	li $t4, 1 # constante
@@ -40,7 +43,7 @@
 	add $s0, $zero, $a0 #Pasamos vallor de n a s0
 	addi $a0, $s0, -1 #decremendamos a N -1
 	jal fibonacci #Llamamos funcion fibonacci con n-1
-	add $t1, $zero, $v0 
+	add $t1, $zero, $v0 # pasamos el valor de v0 de la llamada fibonacci en t1
 	
 	addi $a0, $s0, -2 #n-2
 	jal fibonacci #llamamos a la funcion con n-2
