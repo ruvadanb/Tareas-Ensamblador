@@ -4,7 +4,7 @@
 	End: .word 0 0 0 0 0 0 0 0  #Guardamos los espacios necesarios
 .text
 	Main:
-	li $s0, 2 # Esta Es nuestra n
+	li $s0, 3 # Esta Es nuestra n
 	la $t0, Beg #Asignamos la direccion de Torre A a t0
 	la $t1, Aux #Asignamos la direccion de Torre B a t1
 	la $t2, End #Asignamos la direccion de Torre C a t2
@@ -32,6 +32,8 @@
 	j Exit
 	
 	BCase:
+	#add $t0, $zero, $t1 #guardamos el valor de la primera en la ultima
+	#add $t1, $zero, $t3 #guardamos el valor de la ultima en la primera
 	addi $t0, $t0, -4 #recorremos a t0 para que apunte al valor y no al tope vacio
 	sw $zero, 0($t0) #ponemos en cero el valor tope de la torre 1
 	sw $s1, 0($t2) #ponemos en 1 el valor tope de la torre 3
@@ -49,37 +51,35 @@
 	#para el primer paso
 	addi $s1, $s1, -1 #decrementamos el valor de n(copia)
 	#reservamos memoria para el stack
-	addi $sp, $sp, -8
-	sw $ra, 0($sp) #guardamos direccion de retorno  
-	sw $s1, 4($sp) #guardamos valor de n en el stack
-	#paso 1
+	#paso 1 b->c
 	add $t3, $zero, $t1 #hacemos copia de la direccion de t2 (torre 2)
-	add $t1, $zero, $t2 # t1=t0
-	add $t2, $zero, $t3 # t0=t1
+	add $t1, $zero, $t2 # t1=t2
+	add $t2, $zero, $t3 # t2=t1
 	jal Hanoi
 	
 	lw $ra, 0($sp) #guardamos la direccion de retorno
 	lw $s1, 4($sp)#guardamos la n actual
 	#paso 2
+	#deshacemos el swap
 	add $t3, $zero, $t1 #en t3 hacemos copia de la direccion de end
-	add $t1, $zero, $t0 #guardamos el valor de la primera en la ultima
-	add $t0, $zero, $t3 #guardamos el valor de la ultima en la primera
+	add $t1, $zero, $t2 #guardamos el valor de la primera en la ultima
+	add $t2, $zero, $t3 #guardamos el valor de la ultima en la primera
 	#sacamos el disco
-	addi $t1, $t1, -4 #t0 t0 
-	sw $zero, 0($t1)
-	sw $s1, 0($t2)
-	addi $t2, $t2, 4
+	addi $t0, $t0, -4 #t0 t0 
+	sw $zero, 0($t0) #ponemos en cero el tope de la torre 1
+	sw $s1, 0($t2) #ponemoso el disco en la ultima torre
+	addi $t2, $t2, 4 #le sumamos 4 para pauntar al tope
 	
-	#paso 3
-	addi $s1, $s1, -1
-	add $t3, $zero, $t1
-	add $t1, $zero, $t0
-	add $t0, $zero, $t3
-	addi $sp, $sp, -8
+	addi $s1, $s1, -1 #le hacemos n-1
+	add $t3, $zero, $t1 #t3=t1
+	add $t1, $zero, $t0 #t1=t0
+	add $t0, $zero, $t3 #t0=t1
+	#addi $sp, $sp, -8
 	jal Hanoi
 	
 	lw $ra, 0($sp)
 	lw $s1, 4($sp)
+	
 	add $t3, $zero, $t1
 	add $t1, $zero, $t0
 	add $t0, $zero, $t3
