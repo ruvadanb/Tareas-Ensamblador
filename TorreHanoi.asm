@@ -85,6 +85,6 @@
 	add $t1, $zero, $t0 # We make t1 have the address of B tower
 	add $t0, $zero, $t3 # And t0 have the address of A
 	addi $sp, $sp, 8 # We reset stack pointer
-	jr $ra # Return where ra says
+	jr $ra # Return where ra 
 	
 	Exit:
